@@ -1,4 +1,4 @@
-package com.quizapp.quiz.controller;
+package com.quizapp.result.Controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/quiz")
-public class QuizController {
+@RequestMapping("/result")
+public class ResultController {
     @GetMapping("/test")
     public ResponseEntity<String> checkConnection() {
-        return new ResponseEntity<>("Quiz responding OK :)", HttpStatus.OK);
+        return new ResponseEntity<>("Result responding OK :)", HttpStatus.OK);
     }
 }

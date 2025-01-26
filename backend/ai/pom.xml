@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.quizapp</groupId>
-	<artifactId>quiz</artifactId>
+	<artifactId>ai</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>quiz</name>
-	<description>Quiz Service</description>
+	<name>ai</name>
+	<description>AI Service</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -104,4 +104,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
