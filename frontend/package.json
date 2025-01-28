@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.11"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "npm test && vite build",
+    "test": "prettier --check . && tsc --noEmit",
+    "prettier:update": "prettier --write ."
+  }
+}
