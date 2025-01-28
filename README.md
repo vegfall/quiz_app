@@ -6,6 +6,7 @@ Created for PG3402 exam
 - [ ] Setup Gateway API key to block unauthorized communication
 - [ ] Setup Async Comm (RabbitMQ)
 - [ ] Setup Docker
+- [ ] Setup AI Communication
 
 ## Run order
 1. Consul --- consul agent -dev -node quizapp
