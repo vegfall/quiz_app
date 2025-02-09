@@ -17,6 +17,7 @@ export default function HomePage() {
       <h3>Session Key:</h3>
       <input type="text" />
       <button>Join Existing Quiz</button>
+      <hr />
       <h2>Available Sessions</h2>
     </div>
   );
