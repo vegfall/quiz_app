@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS sessions (
+    session_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    session_key VARCHAR(255) NOT NULL
+);

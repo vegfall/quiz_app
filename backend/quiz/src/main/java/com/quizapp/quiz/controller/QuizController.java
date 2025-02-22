@@ -1,11 +1,10 @@
 package com.quizapp.quiz.controller;
 
+import com.quizapp.quiz.entity.SessionEntity;
 import com.quizapp.quiz.service.SingleplayerQuizService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/quiz")
@@ -28,5 +27,18 @@ public class QuizController {
         return response != null
                 ? new ResponseEntity<>(response, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
+    }
+
+    @GetMapping("/db/{id}")
+    public ResponseEntity<SessionEntity> getSessionEntityTest(@PathVariable Long id) {
+        return new ResponseEntity<>(quizService.getSessionEntity(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/db/{sessionKey}")
+    public ResponseEntity<String> postSessionEntityTest(@PathVariable String sessionKey) {
+        quizService.saveSessionEntity(sessionKey);
+        String returnValue = "SessionEntity with key " + sessionKey + " created";
+
+        return new ResponseEntity<>(returnValue, HttpStatus.OK);
     }
 }
