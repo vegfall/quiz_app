@@ -1,4 +1,4 @@
-package com.quizapp.result.Controller;
+package com.quizapp.result.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
