@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  mysql-quiz:
+    image: mysql:8.0
+    container_name: mysql_quiz
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: quizdb
+    ports:
+      - "3306:3306"
+    volumes:
+      - quiz_db_data:/var/lib/mysql
+
+  quiz:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: quiz
+    image: quiz:latest
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql-quiz
+
+volumes:
+  quiz_db_data:
