@@ -2,10 +2,11 @@
 Created for PG3402 exam
 
 ## ToDo
-- [ ] Setup Frontend
-- [ ] Setup Gateway API key to block unauthorized communication
-- [ ] Setup Async Comm (RabbitMQ)
+- [x] Setup Frontend
+- [x] Setup Async Comm (RabbitMQ)
+- [ ] Setup database (MySQL)
 - [ ] Setup Docker
+- [ ] Setup Gateway API key to block unauthorized communication
 - [ ] Setup AI Communication
 
 ## Run order
