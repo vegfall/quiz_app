@@ -69,7 +69,6 @@ public class AMQPConfig {
 
     @Bean
     public Object forceRabbitAdminInit(RabbitAdmin rabbitAdmin, ConnectionFactory connectionFactory) throws IOException, TimeoutException {
-        // Create a channel to force initialization of RabbitAdmin and declaration of all infrastructure
         connectionFactory.createConnection().createChannel(false).close();
         return new Object();
     }
