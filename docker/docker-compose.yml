@@ -15,7 +15,7 @@ services:
       - quiz_db_data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 20s
+      timeout: 5s
       retries: 10
 
   mysql-question:
@@ -32,7 +32,7 @@ services:
       - question_db_data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 20s
+      timeout: 5s
       retries: 10
 
   mysql-result:
@@ -49,7 +49,7 @@ services:
       - result_db_data:/var/lib/mysql
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-      timeout: 20s
+      timeout: 5s
       retries: 10
 
   quiz:
@@ -102,6 +102,20 @@ services:
     depends_on:
       mysql-result:
         condition: service_healthy
+
+  ai:
+    build:
+      context: ../backend/ai
+      dockerfile: Dockerfile
+    container_name: ai
+    image: ai:latest
+    env_file:
+      - ../backend/ai/.env
+    environment:
+      - SPRING_CLOUD_CONSUL_ENABLED=false
+      - SERVER_PORT=8083
+    ports:
+      - "8083:8083"
 
 volumes:
   quiz_db_data:
