@@ -1,11 +1,7 @@
-version: "3.8"
-
 services:
   mysql-quiz:
     image: mysql:8.0
     container_name: mysql_quiz
-    #env_file:
-    #  - ../backend/quiz/.env
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: quizdb
@@ -21,8 +17,6 @@ services:
   mysql-question:
     image: mysql:8.0
     container_name: mysql_question
-    #env_file:
-    #  - ../backend/question/.env
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: questiondb
@@ -38,8 +32,6 @@ services:
   mysql-result:
     image: mysql:8.0
     container_name: mysql_result
-    #env_file:
-    #  - ../backend/result/.env
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: resultdb
@@ -65,6 +57,20 @@ services:
       test: [ "CMD", "rabbitmqctl", "status" ]
       timeout: 5s
       retries: 5
+
+  gateway:
+    build:
+      context: ../backend/gateway
+      dockerfile: Dockerfile
+    container_name: gateway
+    image: gateway:latest
+    env_file:
+      - ../backend/gateway/.env
+    environment:
+      - SPRING_CLOUD_CONSUL_ENABLED=false
+      - SERVER_PORT=8000
+    ports:
+      - "8000:8000"
 
   quiz:
     build:
