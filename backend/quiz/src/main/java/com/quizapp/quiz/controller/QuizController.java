@@ -41,4 +41,9 @@ public class QuizController {
 
         return new ResponseEntity<>(returnValue, HttpStatus.OK);
     }
+
+    @GetMapping("/session/get-sessions")
+    public ResponseEntity<String[]> getSessionKeys() {
+        return new ResponseEntity<>(quizService.getSessionKeys(), HttpStatus.OK);
+    }
 }

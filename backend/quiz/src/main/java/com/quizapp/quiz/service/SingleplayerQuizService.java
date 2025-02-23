@@ -6,6 +6,9 @@ import com.quizapp.quiz.repository.SessionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @Service
 public class SingleplayerQuizService implements QuizService {
@@ -32,5 +35,16 @@ public class SingleplayerQuizService implements QuizService {
         log.info("SessionEntity with sessionKey {} created!", sessionKey);
 
         sessionRepository.save(entity);
+    }
+
+    public String[] getSessionKeys() {
+        List<SessionEntity> sessions = sessionRepository.findAll();
+        List<String> keys = new ArrayList<>();
+
+        for (SessionEntity session : sessions) {
+            keys.add(session.getSessionKey());
+        }
+
+        return keys.toArray(new String[0]);
     }
 }
