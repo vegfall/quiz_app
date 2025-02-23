@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.BlockingQueue;
@@ -12,6 +13,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 @Slf4j
 @Service
+@DependsOn("rabbitAdmin")
 public class ResultEventHandler {
     private final RabbitTemplate rabbitTemplate;
     private final SingleplayerQuestionService questionService;

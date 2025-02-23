@@ -40,8 +40,9 @@ Created for PG3402 exam
 5. Repeat step 2 - 4 for:
     - **backend/question**
     - **backend/result**
-6. Navigate to **docker** folder
-7. Run *docker-compose up --build*
+6. Repeat step 2 - 3 for **backend/ai**
+7. Navigate to **docker** folder
+8. Run *docker-compose up --build*
 
 ## Build Setup Without Docker
 ### Requirements
