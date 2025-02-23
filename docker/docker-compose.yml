@@ -90,8 +90,6 @@ services:
       dockerfile: Dockerfile
     container_name: gateway
     image: gateway:latest
-    env_file:
-      - ../backend/gateway/.env
     environment:
       - SPRING_CLOUD_CONSUL_HOST=consul
       - SPRING_CLOUD_CONSUL_PORT=8500

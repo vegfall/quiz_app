@@ -6,7 +6,7 @@ Created for PG3402 exam
 - [x] Setup Async Comm (RabbitMQ)
 - [x] Setup database (MySQL)
 - [x] Setup Docker
-- [ ] Setup Gateway API key to block unauthorized communication
+- [x] Setup Gateway API key to block unauthorized communication
 - [ ] Setup AI Communication
 
 ## Run order
