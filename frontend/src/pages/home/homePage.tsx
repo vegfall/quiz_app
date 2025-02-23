@@ -19,6 +19,7 @@ export default function HomePage() {
       <button>Join Existing Quiz</button>
       <hr />
       <h2>Available Sessions</h2>
+
     </div>
   );
 }
