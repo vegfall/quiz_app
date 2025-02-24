@@ -91,8 +91,8 @@ services:
     container_name: gateway
     image: gateway:latest
     environment:
-      - SPRING_CLOUD_CONSUL_HOST=consul
-      - SPRING_CLOUD_CONSUL_PORT=8500
+      - SPRING_CLOUD_CONSUL_HOST=${SPRING_CLOUD_CONSUL_HOST}
+      - SPRING_CLOUD_CONSUL_PORT=${SPRING_CLOUD_CONSUL_PORT}
       - SERVER_PORT=8000
     ports:
       - "8000:8000"
@@ -110,11 +110,12 @@ services:
       dockerfile: Dockerfile
     container_name: quiz
     image: quiz:latest
-    env_file:
-      - ../backend/quiz/.env
     environment:
-      - SPRING_CLOUD_CONSUL_HOST=consul
-      - SPRING_CLOUD_CONSUL_PORT=8500
+      - SPRING_CLOUD_CONSUL_HOST=${SPRING_CLOUD_CONSUL_HOST}
+      - SPRING_CLOUD_CONSUL_PORT=${SPRING_CLOUD_CONSUL_PORT}
+      - DB_URL_QUIZ=${DB_URL_QUIZ}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
     depends_on:
       consul:
         condition: service_healthy
@@ -129,13 +130,14 @@ services:
       dockerfile: Dockerfile
     container_name: question
     image: question:latest
-    env_file:
-      - ../backend/question/.env
     environment:
-      - SPRING_CLOUD_CONSUL_HOST=consul
-      - SPRING_CLOUD_CONSUL_PORT=8500
-      - RABBITMQ_HOST=rabbitmq
-      - RABBITMQ_PORT=5672
+      - SPRING_CLOUD_CONSUL_HOST=${SPRING_CLOUD_CONSUL_HOST}
+      - SPRING_CLOUD_CONSUL_PORT=${SPRING_CLOUD_CONSUL_PORT}
+      - RABBITMQ_HOST=${RABBITMQ_HOST}
+      - RABBITMQ_PORT=${RABBITMQ_PORT}
+      - DB_URL_QUESTION=${DB_URL_QUESTION}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
     depends_on:
       consul:
         condition: service_healthy
@@ -152,13 +154,14 @@ services:
       dockerfile: Dockerfile
     container_name: result
     image: result:latest
-    env_file:
-      - ../backend/result/.env
     environment:
-      - SPRING_CLOUD_CONSUL_HOST=consul
-      - SPRING_CLOUD_CONSUL_PORT=8500
-      - RABBITMQ_HOST=rabbitmq
-      - RABBITMQ_PORT=5672
+      - SPRING_CLOUD_CONSUL_HOST=${SPRING_CLOUD_CONSUL_HOST}
+      - SPRING_CLOUD_CONSUL_PORT=${SPRING_CLOUD_CONSUL_PORT}
+      - RABBITMQ_HOST=${RABBITMQ_HOST}
+      - RABBITMQ_PORT=${RABBITMQ_PORT}
+      - DB_URL_RESULT=${DB_URL_RESULT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
     depends_on:
       consul:
         condition: service_healthy
@@ -175,13 +178,11 @@ services:
       dockerfile: Dockerfile
     container_name: ai
     image: ai:latest
-    env_file:
-      - ../backend/ai/.env
     environment:
-      - SPRING_CLOUD_CONSUL_HOST=consul
-      - SPRING_CLOUD_CONSUL_PORT=8500
-      - RABBITMQ_HOST=rabbitmq
-      - RABBITMQ_PORT=5672
+      - SPRING_CLOUD_CONSUL_HOST=${SPRING_CLOUD_CONSUL_HOST}
+      - SPRING_CLOUD_CONSUL_PORT=${SPRING_CLOUD_CONSUL_PORT}
+      - RABBITMQ_HOST=${RABBITMQ_HOST}
+      - RABBITMQ_PORT=${RABBITMQ_PORT}
     depends_on:
       consul:
         condition: service_healthy
