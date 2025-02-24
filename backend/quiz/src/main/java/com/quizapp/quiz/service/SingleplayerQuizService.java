@@ -24,6 +24,10 @@ public class SingleplayerQuizService implements QuizService {
         return questionClient.testQuestionCommunication();
     }
 
+    public String testQuestionCommunicationTwo() {
+        return questionClient.testQuestionCommunicationTwo();
+    }
+
     public SessionEntity getSessionEntity(Long id) {
         return sessionRepository.findById(id).orElse(null);
     }

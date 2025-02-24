@@ -44,6 +44,10 @@ public class QuizController {
 
     @GetMapping("/session/get-sessions")
     public ResponseEntity<String[]> getSessionKeys() {
-        return new ResponseEntity<>(quizService.getSessionKeys(), HttpStatus.OK);
+        String[] test = new String[2];
+        test[0] = quizService.testQuestionCommunication();
+        test[1] = quizService.testQuestionCommunicationTwo();
+
+        return new ResponseEntity<>(test, HttpStatus.OK);
     }
 }

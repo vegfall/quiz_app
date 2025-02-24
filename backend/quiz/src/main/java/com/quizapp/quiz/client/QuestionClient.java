@@ -16,7 +16,16 @@ public class QuestionClient {
     public String testQuestionCommunication() {
         return webClient
                 .get()
-                .uri("test")
+                .uri("testrabbitai")
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+    }
+
+    public String testQuestionCommunicationTwo() {
+        return webClient
+                .get()
+                .uri("testrabbitresult")
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
