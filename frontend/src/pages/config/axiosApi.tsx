@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-const apiUrl = "http://localhost:8000/";
+const apiUrl = 'http://localhost:8000/';
 
 export const quizApi = axios.create({
   baseURL: `${apiUrl}quiz/`,

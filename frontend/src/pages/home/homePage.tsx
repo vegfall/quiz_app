@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { quizApi } from "../config/axiosApi";
+import React, { useEffect, useState } from 'react';
+import { quizApi } from '../config/axiosApi';
 
 export default function HomePage() {
   const [sessionKeys, setSessionKeys] = useState<string[]>([]);
 
   useEffect(() => {
     quizApi
-      .get("/session/get-sessions") //FIX LATER
+      .get('/session/get-sessions') //FIX LATER
       .then((response) => {
         setSessionKeys(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching sessions:", error);
-        alert("Failed to load sessions. Please try again later.");
+        console.error('Error fetching sessions:', error);
+        alert('Failed to load sessions. Please try again later.');
       });
   }, []);
 
