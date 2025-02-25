@@ -2,7 +2,6 @@ package com.quizapp.question.event;
 
 import com.quizapp.question.dto.ResultDTO;
 import com.quizapp.question.dto.request.GetResultRequest;
-import com.quizapp.question.service.SingleplayerQuestionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+//https://www.baeldung.com/java-blocking-queue
 @Slf4j
 @Service
 @DependsOn("rabbitAdmin")

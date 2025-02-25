@@ -28,6 +28,9 @@ public class AMQPConfig {
     @Value("${amqp.queue.ai.response}")
     private String aiResponseQueue;
 
+    @Value("${amqp.queue.result.response}")
+    private String resultResponseQueue;
+
     @Bean
     public TopicExchange resultExchange() {
         return ExchangeBuilder.topicExchange(resultExchangeName)
@@ -48,8 +51,18 @@ public class AMQPConfig {
     }
 
     @Bean
+    public Queue resultResponseQueue() {
+        return QueueBuilder.durable(resultResponseQueue).build();
+    }
+
+    @Bean
     public Binding aiResponseBinding(Queue aiResponseQueue, TopicExchange aiExchange) {
         return BindingBuilder.bind(aiResponseQueue).to(aiExchange).with("ai.queue.response");
+    }
+
+    @Bean
+    public Binding resultResponseBinding(Queue resultResponseQueue, TopicExchange resultExchange) {
+        return BindingBuilder.bind(resultResponseQueue).to(resultExchange).with("result.queue.response");
     }
 
     @Bean
