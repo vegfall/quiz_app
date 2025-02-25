@@ -5,6 +5,7 @@ import "../application/app.css";
 import CreatePage from "../subpages/createPage";
 import LobbyPage from "../subpages/lobbyPage";
 import PlayPage from "../subpages/playPage";
+import ResultPage from "../subpages/resultPage";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
             <Route path={"/create"} element={<CreatePage />} />
             <Route path={"/lobby"} element={<LobbyPage />} />
             <Route path={"/play"} element={<PlayPage />} />
+            <Route path={"/result"} element={<ResultPage />} />
           </Routes>
         </Router>
       </div>
