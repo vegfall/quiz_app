@@ -1,6 +1,9 @@
 package com.quizapp.question.config;
 
+import com.rabbitmq.client.Channel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.connection.Connection;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -13,6 +16,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 //https://www.rabbitmq.com/tutorials/tutorial-four-spring-amqp
+@Slf4j
 @Configuration
 public class AMQPConfig {
     @Value("${amqp.exchange.name}")
@@ -68,8 +72,13 @@ public class AMQPConfig {
     }
 
     @Bean
-    public Object forceRabbitAdminInit(RabbitAdmin rabbitAdmin, ConnectionFactory connectionFactory) throws IOException, TimeoutException {
-        connectionFactory.createConnection().createChannel(false).close();
+    public Object forceRabbitAdminInit(RabbitAdmin rabbitAdmin, ConnectionFactory connectionFactory) {
+        try (Connection connection = connectionFactory.createConnection()){
+            Channel channel =  connection.createChannel(false);
+        } catch (Exception error) {
+            log.error("Failed to initialize RabbitMQ admin", error);
+        }
+
         return new Object();
     }
 }
