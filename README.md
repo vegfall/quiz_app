@@ -8,9 +8,9 @@ Created for PG3402 exam
 - [x] Setup Docker
 - [x] Setup Gateway API key to block unauthorized communication
 - [x] Setup AI Communication
-- [ ] Setup Quiz
-- [ ] Setup Question
-- [ ] Setup AI
+- [x] Setup Quiz
+- [x] Setup Question
+- [x] Setup AI
 - [ ] Setup Result
 
 ## Run order
