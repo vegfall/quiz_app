@@ -71,12 +71,22 @@ export default function HomePage() {
       </h3>
       <hr />
       <h3>Username:</h3>
-      <input type="text" />
-      <button>Start New Quiz</button>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Enter your username."
+      />
+      <button onClick={handleNewQuiz}>Start New Quiz</button>
       <hr />
       <h3>Session Key:</h3>
-      <input type="text" />
-      <button>Join Existing Quiz</button>
+      <input
+        type="text"
+        value={sessionKey}
+        onChange={(e) => setSessionKey(e.target.value)}
+        placeholder="Enter an existing session key."
+      />
+      <button onClick={handleExistingQuiz}>Join Existing Quiz</button>
       <hr />
       <h2>Available Sessions</h2>
       <ul>
