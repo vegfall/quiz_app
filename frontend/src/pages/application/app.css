@@ -78,9 +78,13 @@ hr {
   margin: 20px 0 20px 0;
 }
 
-.session-item {
+.sessions {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+}
+
+.session > button {
+  width: 30%;
 }

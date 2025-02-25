@@ -92,14 +92,14 @@ export default function HomePage() {
       <ul>
         {sessions.map((session) => (
           <li key={session.sessionKey}>
+            <hr />
             <div className="sessions">
               <h4>
-                Session Key: {session.sessionKey} | Theme: {session.sessionKey}
+                Session Key: {session.sessionKey} | Theme: {session.theme}
               </h4>
               <button onClick={() => handleSelectSession(session.sessionKey)}>
                 Select
               </button>
-              <hr />
             </div>
           </li>
         ))}
