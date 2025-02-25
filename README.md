@@ -12,6 +12,9 @@ Created for PG3402 exam
 - [x] Setup Question
 - [x] Setup AI
 - [x] Setup Result
+- [ ] Add Dockerhub
+- [ ] Add Exception handling
+- [ ] Add tests?
 
 ## Run order
 1. Consul --- consul agent -dev -node quizapp
