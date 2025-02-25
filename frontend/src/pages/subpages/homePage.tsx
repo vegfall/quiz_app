@@ -94,9 +94,9 @@ export default function HomePage() {
           <li key={session.sessionKey}>
             <hr />
             <div className="sessions">
-              <h4>
+              <h3>
                 Session Key:{session.sessionKey} Theme:{session.theme}
-              </h4>
+              </h3>
               <button onClick={() => handleSelectSession(session.sessionKey)}>
                 Select
               </button>

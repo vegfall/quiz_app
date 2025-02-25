@@ -73,15 +73,17 @@ export default function ResultPage() {
         <div>
           <h1 className="title">Quiz Result</h1>
           <hr />
-          <h2>Overall Score: {score.score}</h2>
+          <h2>
+            Overall Score: {score.score} / {score.questions.length}
+          </h2>
           <hr />
           <div>
             {score.questions.map((question: RevealQuestion, index) => (
               //PUT IN CSS?
               <div key={index} style={{ marginBottom: "20px" }}>
-                <h3>
+                <h4>
                   {index + 1}. {question.questionText}
-                </h3>
+                </h4>
                 <ul>
                   {question.alternatives.map((alternative) => (
                     <li key={alternative.alternativeKey}>
@@ -106,6 +108,35 @@ export default function ResultPage() {
       ) : (
         <h2>Loading result...</h2>
       )}
+
+      <div style={{ marginTop: "30px" }}>
+        <hr />
+        <h2>Leaderboard</h2>
+        <hr />
+        {leaderboard.length > 0 ? (
+          <ul>
+            {leaderboard.map((entry, index) => {
+              const isCurrentUser = entry.username === Cookies.get("username");
+              return (
+                <li
+                  key={index}
+                  //MOVE TO CSS?
+                  style={
+                    isCurrentUser
+                      ? { fontWeight: "bold" }
+                      : { fontWeight: "normal" }
+                  }
+                >
+                  {entry.username}: {entry.totalScore} points.
+                  {isCurrentUser && " (You)"}
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <h2>No leaderboard data available yet...</h2>
+        )}
+      </div>
     </div>
   );
 }
