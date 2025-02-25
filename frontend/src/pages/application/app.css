@@ -63,7 +63,8 @@ button:hover {
 
 h1,
 h2,
-h3 {
+h3,
+li {
   color: rgb(4, 227, 255);
 }
 

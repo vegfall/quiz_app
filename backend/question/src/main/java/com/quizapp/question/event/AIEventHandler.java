@@ -1,5 +1,6 @@
 package com.quizapp.question.event;
 
+import com.quizapp.question.dto.request.AIChatRequest;
 import com.quizapp.question.service.SingleplayerQuestionService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +32,7 @@ public class AIEventHandler {
     }
 
     public void sendAIRequest() {
-        String request = "This is Question saying Hi to AI";
+        AIChatRequest request = new AIChatRequest("1234", "Tell a joke");
 
         rabbitTemplate.convertAndSend(exchangeName, aiRequestQueueName, request);
     }

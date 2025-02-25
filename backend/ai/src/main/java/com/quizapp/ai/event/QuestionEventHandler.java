@@ -1,5 +1,8 @@
 package com.quizapp.ai.event;
 
+import com.quizapp.ai.dto.request.AIChatRequest;
+import com.quizapp.ai.dto.response.AIChatResponse;
+import com.quizapp.ai.service.SingleplayerAIService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 @DependsOn("rabbitAdmin")
 public class QuestionEventHandler {
     private final RabbitTemplate rabbitTemplate;
+    private final SingleplayerAIService aiService;
 
     @Value("${amqp.exchange.name}")
     private String exchangeName;
@@ -19,25 +23,23 @@ public class QuestionEventHandler {
     @Value("${amqp.queue.ai.response}")
     private String aiResponseQueueName;
 
-    public QuestionEventHandler(RabbitTemplate rabbitTemplate) {
+    public QuestionEventHandler(RabbitTemplate rabbitTemplate, SingleplayerAIService aiService) {
         this.rabbitTemplate = rabbitTemplate;
+        this.aiService = aiService;
     }
 
     @RabbitListener(queues = "${amqp.queue.ai.request}")
-    public void handleAIRequest(String request) {
-        log.info("Received AIChatRequest: {}", request);
+    public void handleAIRequest(AIChatRequest request) {
+        AIChatResponse response = aiService.getResponse(request);
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException error) {
-            Thread.currentThread().interrupt();
-            log.error("Interrupted during AI thread sleep", error);
-        }
+        log.info("Received AIChatRequest: {}", request.getPrompt());
 
-        String response = "Hi from AI";
 
-        rabbitTemplate.convertAndSend(exchangeName, aiResponseQueueName, response);
+        String returnValue = response.getResponse();
 
-        log.info("Sent AIChatResponse: {}", response);
+
+        rabbitTemplate.convertAndSend(exchangeName, aiResponseQueueName, returnValue);
+
+        log.info("Sent AIChatResponse: {}", response.getPrompt());
     }
 }
