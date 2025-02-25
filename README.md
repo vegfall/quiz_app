@@ -7,7 +7,11 @@ Created for PG3402 exam
 - [x] Setup database (MySQL)
 - [x] Setup Docker
 - [x] Setup Gateway API key to block unauthorized communication
-- [ ] Setup AI Communication
+- [x] Setup AI Communication
+- [ ] Setup Quiz
+- [ ] Setup Question
+- [ ] Setup AI
+- [ ] Setup Result
 
 ## Run order
 1. Consul --- consul agent -dev -node quizapp
