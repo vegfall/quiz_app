@@ -1,5 +1,6 @@
 package com.quizapp.question.controller;
 
+import com.quizapp.question.dto.request.NewSessionRequest;
 import com.quizapp.question.entity.QuestionEntity;
 import com.quizapp.question.service.SingleplayerQuestionService;
 import lombok.extern.slf4j.Slf4j;
@@ -49,5 +50,10 @@ public class QuestionController {
         String returnValue = "QuestionEntity with question " + questionText + " created";
 
         return new ResponseEntity<>(returnValue, HttpStatus.OK);
+    }
+
+    @PostMapping("post-session")
+    public ResponseEntity<HttpStatus> TempPostSession(@RequestBody NewSessionRequest request) {
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

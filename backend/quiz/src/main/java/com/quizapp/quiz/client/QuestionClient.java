@@ -28,22 +28,22 @@ public class QuestionClient {
     //Sessions
     public Void postSession(NewSessionRequest request) {
         return webClient
-                .post()
-                .uri("post-session")
-                .bodyValue(request)
-                .retrieve()
-                .bodyToMono(Void.class)
-                .block();
+            .post()
+            .uri("post-session")
+            .bodyValue(request)
+            .retrieve()
+            .bodyToMono(Void.class)
+            .block();
     }
 
     //Questions
     public QuestionDTO getQuestion(String sessionKey, Integer questionKey) {
         return webClient
-                .get()
-                .uri(sessionKey + "/" + questionKey)
-                .retrieve()
-                .bodyToMono(QuestionDTO.class)
-                .block();
+            .get()
+            .uri(sessionKey + "/" + questionKey)
+            .retrieve()
+            .bodyToMono(QuestionDTO.class)
+            .block();
     }
 
     public Boolean checkMoreQuestions(String sessionKey, int currentQuestionKey) {
