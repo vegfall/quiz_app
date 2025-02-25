@@ -1,5 +1,7 @@
 package com.quizapp.question.event;
 
+import com.quizapp.question.dto.ResultDTO;
+import com.quizapp.question.dto.request.GetResultRequest;
 import com.quizapp.question.service.SingleplayerQuestionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -16,8 +18,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 @DependsOn("rabbitAdmin")
 public class ResultEventHandler {
     private final RabbitTemplate rabbitTemplate;
-    private final SingleplayerQuestionService questionService;
-    private final BlockingQueue<String> resultResponseQueue = new LinkedBlockingQueue<>();
+    private final BlockingQueue<ResultDTO> resultResponseQueue = new LinkedBlockingQueue<>();
 
     @Value("${amqp.exchange.name}")
     private String exchangeName;
@@ -25,27 +26,34 @@ public class ResultEventHandler {
     @Value("${amqp.queue.result.request}")
     private String resultRequestQueueName;
 
-    public ResultEventHandler(RabbitTemplate rabbitTemplate, SingleplayerQuestionService questionService) {
+    public ResultEventHandler(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
-        this.questionService = questionService;
     }
 
-    public void sendResultRequest() {
-        String request = "This is Question saying Hi to Result";
+    public ResultDTO sendGetResultRequest(GetResultRequest request) {
+        ResultDTO response = null;
+        log.info("Sending GetResultRequest: {}", request);
 
         rabbitTemplate.convertAndSend(exchangeName, resultRequestQueueName, request);
+
+        try {
+            response = resultResponseQueue.take();
+            log.info("Received ResultDTO: {}", response);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            log.error("Failed to retrieve ResultDTO from response queue", e);
+        }
+
+        return response;
     }
 
     @RabbitListener(queues = "${amqp.queue.result.response}")
-    public void handleResultResponse(String response) {
-        log.info("Received ResultChatResponse from Result response queue: {}", response);
-        boolean offered = resultResponseQueue.offer(response);
-
-        log.info("YAY IT WORKED :)");
-        questionService.asyncResultTestReceive(response);
+    public void handleResultResponse(ResultDTO result) {
+        log.info("Received ResultDTO from response queue: {}", result);
+        boolean offered = resultResponseQueue.offer(result);
 
         if (!offered) {
-            log.warn("Failed to add ResultChatResponse to the blocking queue. Queue might be full.");
+            log.warn("Failed to add ResultDTO to the blocking queue. Queue might be full.");
         }
     }
 }
