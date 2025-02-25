@@ -1,10 +1,14 @@
 package com.quizapp.result.controller;
 
+import com.quizapp.result.dto.ScoreDTO;
+import com.quizapp.result.dto.SessionScoreDTO;
 import com.quizapp.result.entity.UserEntity;
 import com.quizapp.result.service.SingleplayerResultService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/result")
@@ -15,21 +19,21 @@ public class ResultController {
         this.resultService = resultService;
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<String> checkConnection() {
-        return new ResponseEntity<>("Result responding OK :)", HttpStatus.OK);
+    @GetMapping("{sessionKey}/{username}/score")
+    public ResponseEntity<ScoreDTO> getScore(@PathVariable String sessionKey, @PathVariable String username) {
+        ScoreDTO score = resultService.getScore(sessionKey, username);
+
+        return score != null
+                ? new ResponseEntity<>(score, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/db/{id}")
-    public ResponseEntity<UserEntity> getUserEntityTest(@PathVariable Long id) {
-        return new ResponseEntity<>(resultService.getUserEntity(id), HttpStatus.OK);
-    }
+    @GetMapping("{sessionKey}/scores")
+    public ResponseEntity<List<SessionScoreDTO>> getSessionScores(@PathVariable String sessionKey) {
+        List<SessionScoreDTO> scores = resultService.getScoresForSession(sessionKey);
 
-    @PostMapping("/db/{username}")
-    public ResponseEntity<String> postUserEntityTest(@PathVariable String username) {
-        resultService.saveUserEntity(username);
-        String returnValue = "UserEntity with username " + username + " created";
-
-        return new ResponseEntity<>(returnValue, HttpStatus.OK);
+        return scores.isEmpty()
+                ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(scores, HttpStatus.OK);
     }
 }

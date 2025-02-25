@@ -1,5 +1,8 @@
 package com.quizapp.result.event;
 
+import com.quizapp.result.dto.ResultDTO;
+import com.quizapp.result.dto.request.GetResultRequest;
+import com.quizapp.result.service.SingleplayerResultService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 @DependsOn("rabbitAdmin")
 public class QuestionEventHandler {
+    private final SingleplayerResultService resultService;
     private final RabbitTemplate rabbitTemplate;
 
     @Value("${amqp.exchange.name}")
@@ -19,25 +23,15 @@ public class QuestionEventHandler {
     @Value("${amqp.queue.result.response}")
     private String resultResponseQueueName;
 
-    public QuestionEventHandler(RabbitTemplate rabbitTemplate) {
+    public QuestionEventHandler(SingleplayerResultService resultService, RabbitTemplate rabbitTemplate) {
+        this.resultService = resultService;
         this.rabbitTemplate = rabbitTemplate;
     }
 
     @RabbitListener(queues = "${amqp.queue.result.request}")
-    public void handleResultRequest(String request) {
-        log.info("Received ResultChatRequest: {}", request);
+    public void handleValidationResponse(GetResultRequest request) {
+        ResultDTO result = resultService.postAnswer(request);
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException error) {
-            Thread.currentThread().interrupt();
-            log.error("Interrupted during Result thread sleep", error);
-        }
-
-        String response = "Hi from Result";
-
-        rabbitTemplate.convertAndSend(exchangeName, resultResponseQueueName, response);
-
-        log.info("Sent ResultChatResponse: {}", response);
+        rabbitTemplate.convertAndSend(exchangeName, resultResponseQueueName, result);
     }
 }
