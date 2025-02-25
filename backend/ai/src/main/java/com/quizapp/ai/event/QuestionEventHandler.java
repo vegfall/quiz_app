@@ -30,16 +30,12 @@ public class QuestionEventHandler {
 
     @RabbitListener(queues = "${amqp.queue.ai.request}")
     public void handleAIRequest(AIChatRequest request) {
+        log.info("Received AIChatRequest: {}", request);
+
         AIChatResponse response = aiService.getResponse(request);
 
-        log.info("Received AIChatRequest: {}", request.getPrompt());
+        rabbitTemplate.convertAndSend(exchangeName, aiResponseQueueName, response);
 
-
-        String returnValue = response.getResponse();
-
-
-        rabbitTemplate.convertAndSend(exchangeName, aiResponseQueueName, returnValue);
-
-        log.info("Sent AIChatResponse: {}", response.getPrompt());
+        log.info("Sent AIChatResponse: {}", response);
     }
 }
