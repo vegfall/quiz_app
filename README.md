@@ -11,7 +11,7 @@ Created for PG3402 exam
 - [x] Setup Quiz
 - [x] Setup Question
 - [x] Setup AI
-- [ ] Setup Result
+- [x] Setup Result
 
 ## Run order
 1. Consul --- consul agent -dev -node quizapp
