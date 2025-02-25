@@ -35,5 +35,25 @@ export default function LobbyPage() {
     }
   };
 
-  return <div>{session ? <div>Yay</div> : <div>Nay</div>}</div>;
+  return (
+    <div>
+      {session ? (
+        <div>
+          <h1 className="title">
+            Quiz Lobby for Session ({session?.sessionKey})
+          </h1>
+          <hr />
+          <h3>Theme: {session.theme}</h3>
+          <hr />
+          <h3>Number of alternatives: {session.numberOfAlternatives}</h3>
+          <hr />
+          <button onClick={startQuiz}>Start Quiz</button>
+        </div>
+      ) : (
+        <div>
+          <h2>Loading session...</h2>
+        </div>
+      )}
+    </div>
+  );
 }

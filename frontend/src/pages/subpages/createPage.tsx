@@ -56,7 +56,7 @@ export default function CreatePage() {
         type="text"
         value={theme}
         onChange={(e) => setTheme(e.target.value)}
-        placeholder="Quiz Theme."
+        placeholder="Quiz Theme"
       />
       <hr />
       <h3>Number of alternatives:</h3>

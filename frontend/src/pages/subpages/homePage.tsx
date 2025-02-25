@@ -75,7 +75,7 @@ export default function HomePage() {
         type="text"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        placeholder="Enter your username."
+        placeholder="Enter your username"
       />
       <button onClick={handleNewQuiz}>Start New Quiz</button>
       <hr />
@@ -84,7 +84,7 @@ export default function HomePage() {
         type="text"
         value={sessionKey}
         onChange={(e) => setSessionKey(e.target.value)}
-        placeholder="Enter an existing session key."
+        placeholder="Enter an existing session key"
       />
       <button onClick={handleExistingQuiz}>Join Existing Quiz</button>
       <hr />
@@ -95,7 +95,7 @@ export default function HomePage() {
             <hr />
             <div className="sessions">
               <h4>
-                Session Key: {session.sessionKey} | Theme: {session.theme}
+                Session Key:{session.sessionKey} Theme:{session.theme}
               </h4>
               <button onClick={() => handleSelectSession(session.sessionKey)}>
                 Select
