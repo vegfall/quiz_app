@@ -88,17 +88,19 @@ export default function HomePage() {
       />
       <button onClick={handleExistingQuiz}>Join Existing Quiz</button>
       <hr />
-      <h2>Available Sessions</h2>
+      <h2>Available Sessions:</h2>
       <ul>
         {sessions.map((session) => (
           <li key={session.sessionKey}>
-            <span>
-              <strong>Session Key:</strong> {session.sessionKey} |{" "}
-              <strong>Theme:</strong> {session.theme} |{" "}
-            </span>
-            <button onClick={() => handleSelectSession(session.sessionKey)}>
-              Select
-            </button>
+            <div className="sessions">
+              <h4>
+                Session Key: {session.sessionKey} | Theme: {session.sessionKey}
+              </h4>
+              <button onClick={() => handleSelectSession(session.sessionKey)}>
+                Select
+              </button>
+              <hr />
+            </div>
           </li>
         ))}
       </ul>

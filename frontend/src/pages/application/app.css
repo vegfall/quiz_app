@@ -18,8 +18,9 @@
 
 .main_block {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
 
   max-width: 900px;
   min-width: 900px;
@@ -69,6 +70,17 @@ li {
   color: rgb(4, 227, 255);
 }
 
+li {
+  font-size: 0.7em;
+}
+
 hr {
   margin: 20px 0 20px 0;
+}
+
+.session-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
