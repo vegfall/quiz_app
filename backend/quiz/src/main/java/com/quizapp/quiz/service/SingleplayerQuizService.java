@@ -120,11 +120,6 @@ public class SingleplayerQuizService implements QuizService {
     }
 
     @Override
-    public void startSession(String sessionKey) {
-        setStatus(sessionKey, SessionStatus.ONGOING);
-    }
-
-    @Override
     public SessionDTO loadPreviousSession(String sessionKey, LoadSessionRequest request) {
         SessionEntity sessionEntity = getSessionEntityByKey(sessionKey);
 

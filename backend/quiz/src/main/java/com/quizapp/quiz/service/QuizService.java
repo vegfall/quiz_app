@@ -21,7 +21,6 @@ public interface QuizService {
     RevealScoreDTO getScore(String sessionKey, String username);
     List<SessionScoreDTO> getScores(String sessionKey);
     SessionStatus getStatus(String sessionKey);
-    void startSession(String sessionKey);
     SessionDTO loadPreviousSession(String sessionKey, LoadSessionRequest request);
     List<SessionDTO> getSessions();
 }
