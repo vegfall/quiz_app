@@ -9,7 +9,7 @@ import { RevealQuestion } from "../../types/conclusion/revealQuestion";
 
 export default function ResultPage() {
   const [score, setScore] = useState<RevealScore | null>(null);
-  const [leaderboard, setLeaderboard] = useState<SessionScore[]>([]);
+  const [scoreboard, setScoreboard] = useState<SessionScore[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function ResultPage() {
     }
 
     fetchScore(sessionKey, username);
-    fetchLeaderboard(sessionKey);
+    fetchScoreboard(sessionKey);
   }, [navigate]);
 
   const fetchScore = (sessionKey: string, username: string) => {
@@ -39,14 +39,14 @@ export default function ResultPage() {
       });
   };
 
-  const fetchLeaderboard = (sessionKey: string) => {
+  const fetchScoreboard = (sessionKey: string) => {
     quizApi
       .get<SessionScore[]>(`session/${sessionKey}/scores`)
       .then((response) => {
-        setLeaderboard(response.data);
+        setScoreboard(response.data);
       })
       .catch((error) => {
-        console.error("Failed for fetch leaderboard:", error);
+        console.error("Failed for fetch Scoreboard:", error);
       });
   };
 
@@ -111,11 +111,11 @@ export default function ResultPage() {
 
       <div style={{ marginTop: "30px" }}>
         <hr />
-        <h2>Leaderboard</h2>
+        <h2>Scoreboard</h2>
         <hr />
-        {leaderboard.length > 0 ? (
+        {scoreboard.length > 0 ? (
           <ul>
-            {leaderboard.map((entry, index) => {
+            {scoreboard.map((entry, index) => {
               const isCurrentUser = entry.username === Cookies.get("username");
               return (
                 <li
@@ -134,7 +134,7 @@ export default function ResultPage() {
             })}
           </ul>
         ) : (
-          <h2>No leaderboard data available yet...</h2>
+          <h2>No scoreboard data available yet...</h2>
         )}
       </div>
     </div>
