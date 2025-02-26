@@ -16,8 +16,8 @@ export default function PlayPage() {
   const [correctAlternative, setCorrectAlternative] = useState<number | null>(
     null,
   );
-  //Should be empty string instead of null?
   const [explanation, setExplanation] = useState<string | null>(null);
+  const [score, setScore] = useState<number | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -117,6 +117,7 @@ export default function PlayPage() {
 
         setCorrectAlternative(result.correctAlternative);
         setExplanation(result.explanation);
+        setScore(result.score);
       })
       .catch((error) => {
         console.error("Failed to submit answer:", error);
@@ -133,6 +134,10 @@ export default function PlayPage() {
       {question ? (
         <div>
           <h1 className="title">Quiz :)</h1>
+          <hr />
+          <h4>
+            Score: {score ? score : 0} / {question.questionKey - 1}
+          </h4>
           <hr />
           <h2>{question.questionText}</h2>
           <div>

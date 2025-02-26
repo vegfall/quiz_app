@@ -39,7 +39,7 @@ public class SingleplayerResultService implements ResultService {
 
     @Override
     public ResultDTO postAnswer(GetResultRequest request) {
-        ResultDTO result = new ResultDTO(request.getCorrectAlternativeKey(), request.getExplanation());
+        ResultDTO result;
         UserEntity user = getOrCreateUser(request.getUsername());
         String alternatives;
         ScoreEntity scoreEntity = scoreRepository.findByUserAndSessionKey(user, request.getSessionKey())
@@ -60,6 +60,8 @@ public class SingleplayerResultService implements ResultService {
 
         scoreEntity.setChosenAlternatives(alternatives);
         scoreRepository.save(scoreEntity);
+
+        result = new ResultDTO(request.getCorrectAlternativeKey(), request.getExplanation(), scoreEntity.getTotalScore());
 
         return result;
     }

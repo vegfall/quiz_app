@@ -8,4 +8,5 @@ import lombok.Getter;
 public class ResultDTO {
     private final int correctAlternative;
     private final String explanation;
+    private final int score;
 }
