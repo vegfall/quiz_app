@@ -38,6 +38,25 @@ public class SingleplayerResultService implements ResultService {
     }
 
     @Override
+    public void resetScore(String sessionKey, String username) {
+        UserEntity user = userRepository.findByUsername(username).orElse(null);
+        if (user == null) {
+            return;
+        }
+
+        ScoreEntity scoreEntity = scoreRepository.findByUserAndSessionKey(user, sessionKey).orElse(null);
+        if (scoreEntity == null) {
+            return;
+        }
+
+        log.info("Resetting score for {} in session {}", username, sessionKey);
+
+        scoreEntity.setTotalScore(0);
+        scoreEntity.setChosenAlternatives("");
+        scoreRepository.save(scoreEntity);
+    }
+
+    @Override
     public ResultDTO postAnswer(GetResultRequest request) {
         ResultDTO result;
         UserEntity user = getOrCreateUser(request.getUsername());

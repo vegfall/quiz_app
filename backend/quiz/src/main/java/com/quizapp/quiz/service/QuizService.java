@@ -23,5 +23,6 @@ public interface QuizService {
     SessionStatus getStatus(String sessionKey);
     SessionDTO loadPreviousSession(String sessionKey, LoadSessionRequest request);
     List<SessionDTO> getSessions();
+    void startSession(String sessionKey, String username);
 }
 

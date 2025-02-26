@@ -21,7 +21,7 @@ public class ResultClient {
     public ScoreDTO getScore(String sessionKey, String username) {
         return webClient
                 .get()
-                .uri(sessionKey + "/" + username + "/score")
+                .uri("{sessionKey}/{username}/score", sessionKey, username)
                 .retrieve()
                 .bodyToMono(ScoreDTO.class)
                 .block();
@@ -33,6 +33,15 @@ public class ResultClient {
                 .uri("/{sessionKey}/scores", sessionKey)
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<List<SessionScoreDTO>>() {})
+                .block();
+    }
+
+    public Void resetScore(String sessionKey, String username) {
+        return webClient
+                .put()
+                .uri("{sessionKey}/{username}/score-reset", sessionKey, username)
+                .retrieve()
+                .bodyToMono(Void.class)
                 .block();
     }
 }

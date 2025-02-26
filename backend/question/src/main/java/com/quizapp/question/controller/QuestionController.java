@@ -75,4 +75,11 @@ public class QuestionController {
                 ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(sessionScores, HttpStatus.OK);
     }
+
+    @PutMapping("{sessionKey}/{username}/score-reset")
+    public ResponseEntity<HttpStatus> resetScore(@PathVariable String sessionKey, @PathVariable String username) {
+        questionService.resetScore(sessionKey, username);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

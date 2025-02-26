@@ -11,4 +11,5 @@ public interface ResultService {
     ResultDTO postAnswer(GetResultRequest request);
     ScoreDTO getScore(String sessionKey, String username);
     List<SessionScoreDTO> getScoresForSession(String sessionKey);
+    void resetScore(String username, String sessionKey);
 }

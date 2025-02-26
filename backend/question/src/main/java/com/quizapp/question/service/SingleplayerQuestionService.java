@@ -273,6 +273,11 @@ public class SingleplayerQuestionService implements QuestionService {
         getQuestion(session.getSessionKey(), 1);
     }
 
+    @Override
+    public void resetScore(String sessionKey, String username) {
+        resultClient.resetScore(sessionKey, username);
+    }
+
     private void waitForQuestionsToBeReady(String sessionKey, int maxRetries) {
         int currentRetry = 0;
         while (currentRetry < maxRetries) {

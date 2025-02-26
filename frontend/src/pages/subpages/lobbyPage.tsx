@@ -30,7 +30,16 @@ export default function LobbyPage() {
   }, [navigate]);
 
   const startQuiz = () => {
+    const sessionKey = Cookies.get("sessionKey");
+    const username = Cookies.get("username");
+
     if (session) {
+      quizApi.put(`session/${sessionKey}/${username}/start`).catch((error) => {
+        console.error("Failed to start quiz:", error);
+        alert("Failed to get start quiz. Returning to start...");
+        navigate("/");
+      });
+
       navigate("/play");
     }
   };

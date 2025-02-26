@@ -40,7 +40,7 @@ public class QuestionClient {
     public QuestionDTO getQuestion(String sessionKey, Integer questionKey) {
         return webClient
             .get()
-            .uri(sessionKey + "/" + questionKey)
+            .uri("{sessionKey}/{questionKey}", sessionKey, questionKey)
             .retrieve()
             .bodyToMono(QuestionDTO.class)
             .block();
@@ -49,7 +49,7 @@ public class QuestionClient {
     public Boolean checkMoreQuestions(String sessionKey, int currentQuestionKey) {
         return Boolean.TRUE.equals(webClient
                 .get()
-                .uri(sessionKey + "/" + currentQuestionKey + "/check-more")
+                .uri("{sessionKey}/{currentQuestionKey}/check-more", sessionKey, currentQuestionKey)
                 .retrieve()
                 .bodyToMono(boolean.class)
                 .block());
@@ -58,7 +58,7 @@ public class QuestionClient {
     public ResultDTO postAnswer(String sessionKey, Integer questionKey, PostAnswerRequest answer) {
         return webClient
                 .post()
-                .uri(sessionKey + "/" + questionKey + "/post-answer")
+                .uri("{sessionKey}/{questionKey}/post-answer", sessionKey, questionKey)
                 .bodyValue(answer)
                 .retrieve()
                 .bodyToMono(ResultDTO.class)
@@ -69,7 +69,7 @@ public class QuestionClient {
     public RevealScoreDTO getScore(String sessionKey, String username) {
         return webClient
                 .get()
-                .uri(sessionKey + "/" + username + "/score")
+                .uri("{sessionKey}/{username}/score", sessionKey, username)
                 .retrieve()
                 .bodyToMono(RevealScoreDTO.class)
                 .block();
@@ -78,9 +78,18 @@ public class QuestionClient {
     public List<SessionScoreDTO> getScores(String sessionKey) {
         return webClient
                 .get()
-                .uri(sessionKey + "/scores")
+                .uri("{sessionKey}/scores", sessionKey)
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<List<SessionScoreDTO>>() {})
+                .block();
+    }
+
+    public Void resetScore(String sessionKey, String username) {
+        return webClient
+                .put()
+                .uri("{sessionKey}/{username}/score-reset", sessionKey, username)
+                .retrieve()
+                .bodyToMono(Void.class)
                 .block();
     }
 }

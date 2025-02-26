@@ -17,4 +17,5 @@ public interface QuestionService {
     boolean checkMoreQuestions(String sessionKey, int currentQuestionKey);
     void postSession(NewSessionRequest session);
     void saveAIQuestions(String sessionKey, String aiResponse);
+    void resetScore(String sessionKey, String username);
 }

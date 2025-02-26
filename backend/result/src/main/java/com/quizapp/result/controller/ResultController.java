@@ -4,12 +4,14 @@ import com.quizapp.result.dto.ScoreDTO;
 import com.quizapp.result.dto.SessionScoreDTO;
 import com.quizapp.result.entity.UserEntity;
 import com.quizapp.result.service.SingleplayerResultService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/result")
 public class ResultController {
@@ -35,5 +37,12 @@ public class ResultController {
         return scores.isEmpty()
                 ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(scores, HttpStatus.OK);
+    }
+
+    @PutMapping("{sessionKey}/{username}/score-reset")
+    public ResponseEntity<HttpStatus> resetScore(@PathVariable String sessionKey, @PathVariable String username) {
+        resultService.resetScore(sessionKey, username);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -46,6 +46,13 @@ public class QuizController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @PutMapping("session/{sessionKey}/{username}/start")
+    public ResponseEntity<HttpStatus> startSession(@PathVariable String sessionKey, @PathVariable String username) {
+        quizService.startSession(sessionKey, username);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @GetMapping("session/{sessionKey}/info")
     public ResponseEntity<SessionDTO> getSessionInfo(@PathVariable String sessionKey) {
         SessionDTO session = quizService.getSession(sessionKey);
