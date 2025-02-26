@@ -136,7 +136,10 @@ export default function PlayPage() {
           <h1 className="title">Quiz :)</h1>
           <hr />
           <h4>
-            Score: {score ? score : 0} / {question.questionKey - 1}
+            Score: {score ? score : 0} /{" "}
+            {selectedAlternative
+              ? question.questionKey
+              : question.questionKey - 1}
           </h4>
           <hr />
           <h2>{question.questionText}</h2>
