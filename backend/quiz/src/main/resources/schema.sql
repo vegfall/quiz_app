@@ -7,3 +7,6 @@ CREATE TABLE IF NOT EXISTS sessions (
     current_question_key INT NOT NULL,
     status ENUM('CREATED', 'ONGOING', 'COMPLETED') NOT NULL DEFAULT 'CREATED'
 );
+
+INSERT IGNORE INTO sessions (session_id, session_key, theme, number_of_alternatives, username, current_question_key)
+VALUES (1, 'MOCKQUIZ', 'History', 4, 'MockUser', 0);
