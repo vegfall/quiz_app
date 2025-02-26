@@ -119,6 +119,11 @@ public class SingleplayerQuestionService implements QuestionService {
     @Transactional
     @Override
     public synchronized void saveAIQuestions(String sessionKey, String aiResponse) {
+        if (aiResponse == null || (!aiResponse.trim().startsWith("{") && !aiResponse.trim().startsWith("["))) {
+            log.error("Received an unexpected response from AI: {}", aiResponse);
+            return;
+        }
+
         try {
             List<Question> questions = objectMapper.readValue(aiResponse, new TypeReference<List<Question>>() {});
 
@@ -136,9 +141,9 @@ public class SingleplayerQuestionService implements QuestionService {
             }
 
             questionRepository.saveAll(newQuestions);
-        } catch (Exception e) {
-            log.error("Error saving AI questions: {}", e.getMessage(), e);
-            throw new RuntimeException("Failed to save AI-generated questions", e);
+        } catch (Exception error) {
+            log.error("Error saving AI questions: {}", error.getMessage(), error);
+            throw new RuntimeException("Failed to save AI-generated questions", error);
         }
     }
 
