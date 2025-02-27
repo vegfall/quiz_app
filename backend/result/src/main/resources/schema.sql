@@ -9,5 +9,6 @@ CREATE TABLE IF NOT EXISTS scores (
     session_key VARCHAR(255) NOT NULL,
     total_score INT NOT NULL,
     chosen_alternatives VARCHAR(255),
+    number_of_questions INT NOT NULL DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );

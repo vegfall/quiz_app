@@ -65,7 +65,8 @@ Once you end the quiz you will be brought to the result page. Here you will see:
 - **Overall Score** your end score, with **TotalScore** / **NumberOfQuestions**
 - **Response List** showing you all questions, with chosen and correct answers.
 - **Home** which will bring you back to the frontpage.
-- **Scoreboard** showing you all other players that had played the current game.
+- **Scoreboard** showing you all other players that had played the current game with 
+**TotalScore** / **NumberOfQuestions**
 
 ### Cleanup
 Following these instructions will remove all Quiz app data from your computer, including scores. 

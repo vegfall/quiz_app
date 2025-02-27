@@ -10,4 +10,5 @@ import java.util.List;
 public class ScoreDTO {
     private final List<Integer> chosenAlternatives;
     private final int score;
+    private final int numberOfQuestions;
 }

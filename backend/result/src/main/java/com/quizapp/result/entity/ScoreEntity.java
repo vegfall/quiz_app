@@ -18,6 +18,7 @@ public class ScoreEntity {
     private String sessionKey;
     private int totalScore;
     private String chosenAlternatives;
+    private int numberOfQuestions;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
