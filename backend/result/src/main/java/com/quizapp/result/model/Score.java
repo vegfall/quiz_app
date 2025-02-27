@@ -15,4 +15,7 @@ public class Score {
 
     @Setter
     private int totalScore;
+
+    @Setter
+    private int numberOfQuestions;
 }

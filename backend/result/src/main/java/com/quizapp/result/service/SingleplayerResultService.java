@@ -58,6 +58,8 @@ public class SingleplayerResultService implements ResultService {
 
     @Override
     public ResultDTO postAnswer(GetResultRequest request) {
+        log.info("Receiving in ResultService postAnswer: " + request.getNumberOfQuestions());
+
         ResultDTO result;
         UserEntity user = getOrCreateUser(request.getUsername());
         String alternatives;
@@ -68,6 +70,7 @@ public class SingleplayerResultService implements ResultService {
                     newScore.setSessionKey(request.getSessionKey());
                     newScore.setTotalScore(0);
                     newScore.setChosenAlternatives("");
+                    newScore.setNumberOfQuestions(request.getNumberOfQuestions());
                     return newScore;
                 });
 
@@ -79,6 +82,8 @@ public class SingleplayerResultService implements ResultService {
 
         scoreEntity.setChosenAlternatives(alternatives);
         scoreRepository.save(scoreEntity);
+
+        log.info("Saving in ResultService postAnswer: " + scoreEntity.getNumberOfQuestions());
 
         result = new ResultDTO(request.getCorrectAlternativeKey(), request.getExplanation(), scoreEntity.getTotalScore());
 
@@ -103,6 +108,7 @@ public class SingleplayerResultService implements ResultService {
 
         for (ScoreEntity score : scoreEntities) {
             sessionScoreDTOs.add(resultMapper.toSessionScoreDTO(score));
+            log.info("Returning in ResultService getScoresForSession: " + score.getNumberOfQuestions());
         }
 
         return sessionScoreDTOs;

@@ -209,7 +209,8 @@ public class SingleplayerQuestionService implements QuestionService {
                 answer.getUsername(),
                 chosenAlternative.getAlternativeKey(),
                 correctAlternativeKey,
-                chosenAlternative.getAlternativeExplanation()
+                chosenAlternative.getAlternativeExplanation(),
+                questionKey - 1 //CHECK
         );
 
         return resultEventHandler.sendGetResultRequest(getResultRequest);

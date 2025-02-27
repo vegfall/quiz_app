@@ -8,4 +8,5 @@ import lombok.Getter;
 public class SessionScoreDTO {
     private final String username;
     private int totalScore;
+    private int numberOfQuestions;
 }

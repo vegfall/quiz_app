@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class ResultMapper {
     public ScoreDTO toDTO(Score model) {
-        return new ScoreDTO(model.getChosenAlternatives(), model.getTotalScore());
+        return new ScoreDTO(model.getChosenAlternatives(), model.getTotalScore(), model.getNumberOfQuestions());
     }
 
     public ScoreEntity toEntity(Score model) {
@@ -42,11 +42,12 @@ public class ResultMapper {
                 entity.getScoreId(),
                 entity.getSessionKey(),
                 chosenAlternatives,
-                entity.getTotalScore()
+                entity.getTotalScore(),
+                entity.getNumberOfQuestions()
         );
     }
 
     public SessionScoreDTO toSessionScoreDTO(ScoreEntity entity) {
-        return new SessionScoreDTO(entity.getUser().getUsername(), entity.getTotalScore());
+        return new SessionScoreDTO(entity.getUser().getUsername(), entity.getTotalScore(), entity.getNumberOfQuestions());
     }
 }

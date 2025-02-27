@@ -40,7 +40,7 @@ public class QuestionClient {
     public QuestionDTO getQuestion(String sessionKey, Integer questionKey) {
         return webClient
             .get()
-            .uri("/sessions/{sessionKey}/questions/{questionKey}", sessionKey, questionKey)
+            .uri("sessions/{sessionKey}/questions/{questionKey}", sessionKey, questionKey)
             .retrieve()
             .bodyToMono(QuestionDTO.class)
             .block();
@@ -49,7 +49,7 @@ public class QuestionClient {
     public Boolean checkMoreQuestions(String sessionKey, int currentQuestionKey) {
         return Boolean.TRUE.equals(webClient
                 .get()
-                .uri("/sessions/{sessionKey}/questions/{currentQuestionKey}/has-next", sessionKey, currentQuestionKey)
+                .uri("sessions/{sessionKey}/questions/{currentQuestionKey}/has-next", sessionKey, currentQuestionKey)
                 .retrieve()
                 .bodyToMono(boolean.class)
                 .block());
@@ -69,7 +69,7 @@ public class QuestionClient {
     public RevealScoreDTO getScore(String sessionKey, String username) {
         return webClient
                 .get()
-                .uri("/sessions/{sessionKey}/users/{username}/score", sessionKey, username)
+                .uri("sessions/{sessionKey}/users/{username}/score", sessionKey, username)
                 .retrieve()
                 .bodyToMono(RevealScoreDTO.class)
                 .block();
@@ -78,7 +78,7 @@ public class QuestionClient {
     public List<SessionScoreDTO> getScores(String sessionKey) {
         return webClient
                 .get()
-                .uri("/sessions/{sessionKey}/scores", sessionKey)
+                .uri("sessions/{sessionKey}/scores", sessionKey)
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<List<SessionScoreDTO>>() {})
                 .block();
