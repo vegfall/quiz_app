@@ -148,7 +148,6 @@ export default function PlayPage() {
               <button
                 key={alternative.alternativeKey}
                 onClick={() => handleAlternativeClick(alternative)}
-                //MOVE TO CSS?
                 style={{
                   backgroundColor:
                     selectedAlternative === alternative.alternativeKey

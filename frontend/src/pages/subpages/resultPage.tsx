@@ -79,7 +79,6 @@ export default function ResultPage() {
           <hr />
           <div>
             {score.questions.map((question: RevealQuestion, index) => (
-              //PUT IN CSS?
               <div key={index} style={{ marginBottom: "20px" }}>
                 <h4>
                   {index + 1}. {question.questionText}
@@ -120,7 +119,6 @@ export default function ResultPage() {
               return (
                 <li
                   key={index}
-                  //MOVE TO CSS?
                   style={
                     isCurrentUser
                       ? { fontWeight: "bold" }

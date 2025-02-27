@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 //https://www.rabbitmq.com/tutorials/tutorial-four-spring-amqp
+//https://stackoverflow.com/questions/72308328/spring-amqp-rabbitadmin-unable-to-recreate-queue-when-it-was-manually-deleted?utm_source=chatgpt.com
 @Slf4j
 @Configuration
 public class AMQPConfig {
