@@ -7,7 +7,7 @@ thus it is a requirement.
 ### Requirements
 - [Git](https://git-scm.com/downloads)
 - [Docker](https://docs.docker.com/get-started/get-docker/)
-- MySQL user
+- [MySQL](https://dev.mysql.com/downloads/installer/)
 
 ### Steps
 1. Clone repository: https://github.com/vegfall/quiz_app/
@@ -30,7 +30,7 @@ There will be some pauses during docker compose for each service to wait for the
 - AI is not 100% reliable and might cause some bugs such as:
   - Number of alternatives, might not match what you set at all questions, however it will still work.
   - The return question/alternative might not always follow the expected json structure. If this happens unfortunately 
-  the database might have to be reset. This has only happened once and the fix was unfortunately to reset the database.
+  the database might have to be reset. This has only happened twice and the fix was unfortunately to reset the database.
   I will work on a fix, but for now, if it happens, please reset with the **Cleanup** steps, and set up the game again.
 - If AI is not responding, a short mock quiz called **MOCKQUIZ** can be used to test the game.
 - Very rarely the services do not wait for MySQL to respond, even with health check. If this happens,
