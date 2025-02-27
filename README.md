@@ -33,6 +33,8 @@ There will be some pauses during docker compose for each service to wait for the
   the database might have to be reset. This has only happened once and the fix was unfortunately to reset the database.
   I will work on a fix, but for now, if it happens, please reset with the **Cleanup** steps, and set up the game again.
 - If AI is not responding, a short mock quiz called **MOCKQUIZ** can be used to test the game.
+- Very rarely the services do not wait for MySQL to respond, even with health check. If this happens,
+  run *docker-compose down* and try to run it again with *docker-compose up --build*
 
 ### Game Instructions
 This is a Quiz game with questions dynamically created with OpenAI. 

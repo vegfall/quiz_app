@@ -101,7 +101,7 @@ public class QuizController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/sessions/{sessionKey}/users/{username}/score")
+    @GetMapping("sessions/{sessionKey}/users/{username}/score")
     public ResponseEntity<RevealScoreDTO> getScore(@PathVariable String sessionKey, @PathVariable String username) {
         RevealScoreDTO score = quizService.getScore(sessionKey, username);
 

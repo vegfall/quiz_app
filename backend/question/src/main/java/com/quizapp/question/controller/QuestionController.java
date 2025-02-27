@@ -34,7 +34,7 @@ public class QuestionController {
     }
 
     //Question
-    @GetMapping("/sessions/{sessionKey}/questions/{questionKey}")
+    @GetMapping("sessions/{sessionKey}/questions/{questionKey}")
     public ResponseEntity<QuestionDTO> getQuestion(@PathVariable String sessionKey, @PathVariable Integer questionKey) {
         QuestionDTO question = questionService.getQuestion(sessionKey, questionKey);
 
@@ -43,7 +43,7 @@ public class QuestionController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/sessions/{sessionKey}/questions/{currentQuestionKey}/has-next")
+    @GetMapping("sessions/{sessionKey}/questions/{currentQuestionKey}/has-next")
     public ResponseEntity<Boolean> checkMoreQuestions(@PathVariable String sessionKey, @PathVariable Integer currentQuestionKey) {
         return new ResponseEntity<>(questionService.checkMoreQuestions(sessionKey, currentQuestionKey), HttpStatus.OK);
     }
@@ -58,7 +58,7 @@ public class QuestionController {
                 : new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/sessions/{sessionKey}/users/{username}/score")
+    @GetMapping("sessions/{sessionKey}/users/{username}/score")
     public ResponseEntity<RevealScoreDTO> getScore(@PathVariable String sessionKey, @PathVariable String username) {
         RevealScoreDTO score = questionService.getScore(sessionKey, username);
 

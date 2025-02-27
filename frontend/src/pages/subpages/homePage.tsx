@@ -85,6 +85,7 @@ export default function HomePage() {
         value={sessionKey}
         onChange={(e) => setSessionKey(e.target.value)}
         placeholder="Enter an existing session key"
+        disabled
       />
       <button onClick={handleExistingQuiz}>Join Existing Quiz</button>
       <hr />
