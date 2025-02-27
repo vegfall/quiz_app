@@ -32,7 +32,7 @@ export default function CreatePage() {
     };
 
     quizApi
-      .post("session/create", request)
+      .post("sessions", request)
       .then((response) => {
         const session: Session = response.data;
 

@@ -28,7 +28,7 @@ export default function ResultPage() {
 
   const fetchScore = (sessionKey: string, username: string) => {
     quizApi
-      .get<RevealScore>(`session/${sessionKey}/${username}/score`)
+      .get<RevealScore>(`sessions/${sessionKey}/users/${username}/score`)
       .then((response) => {
         setScore(response.data);
       })
@@ -41,7 +41,7 @@ export default function ResultPage() {
 
   const fetchScoreboard = (sessionKey: string) => {
     quizApi
-      .get<SessionScore[]>(`session/${sessionKey}/scores`)
+      .get<SessionScore[]>(`sessions/${sessionKey}/scores`)
       .then((response) => {
         setScoreboard(response.data);
       })
@@ -125,7 +125,8 @@ export default function ResultPage() {
                       : { fontWeight: "normal" }
                   }
                 >
-                  {entry.username}: {entry.totalScore} points.
+                  {entry.username}: {entry.totalScore} /{" "}
+                  {entry.numberOfQuestions} points.
                   {isCurrentUser && " (You)"}
                 </li>
               );

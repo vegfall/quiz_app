@@ -21,7 +21,7 @@ public class ResultController {
         this.resultService = resultService;
     }
 
-    @GetMapping("{sessionKey}/{username}/score")
+    @GetMapping("sessions/{sessionKey}/users/{username}/score")
     public ResponseEntity<ScoreDTO> getScore(@PathVariable String sessionKey, @PathVariable String username) {
         ScoreDTO score = resultService.getScore(sessionKey, username);
 
@@ -30,7 +30,7 @@ public class ResultController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("{sessionKey}/scores")
+    @GetMapping("sessions/{sessionKey}/scores")
     public ResponseEntity<List<SessionScoreDTO>> getSessionScores(@PathVariable String sessionKey) {
         List<SessionScoreDTO> scores = resultService.getScoresForSession(sessionKey);
 
@@ -39,7 +39,7 @@ public class ResultController {
                 : new ResponseEntity<>(scores, HttpStatus.OK);
     }
 
-    @PutMapping("{sessionKey}/{username}/score-reset")
+    @PutMapping("sessions/{sessionKey}/users/{username}/score/reset")
     public ResponseEntity<HttpStatus> resetScore(@PathVariable String sessionKey, @PathVariable String username) {
         resultService.resetScore(sessionKey, username);
 

@@ -18,7 +18,7 @@ export default function LobbyPage() {
     }
 
     quizApi
-      .get<Session>(`session/${sessionKey}/info`)
+      .get<Session>(`sessions/${sessionKey}`)
       .then((response) => {
         setSession(response.data);
       })
@@ -34,11 +34,13 @@ export default function LobbyPage() {
     const username = Cookies.get("username");
 
     if (session) {
-      quizApi.put(`session/${sessionKey}/${username}/start`).catch((error) => {
-        console.error("Failed to start quiz:", error);
-        alert("Failed to get start quiz. Returning to start...");
-        navigate("/");
-      });
+      quizApi
+        .put(`sessions/${sessionKey}/users/${username}/start`)
+        .catch((error) => {
+          console.error("Failed to start quiz:", error);
+          alert("Failed to get start quiz. Returning to start...");
+          navigate("/");
+        });
 
       navigate("/play");
     }

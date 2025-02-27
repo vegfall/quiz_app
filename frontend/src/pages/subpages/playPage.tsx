@@ -37,7 +37,7 @@ export default function PlayPage() {
   ): Promise<SessionStatus> => {
     try {
       const response = await quizApi.get<SessionStatus>(
-        `session/${sessionKey}/status`,
+        `sessions/${sessionKey}/status`,
       );
       return response.data;
     } catch (error) {
@@ -49,7 +49,7 @@ export default function PlayPage() {
 
   const getCurrentQuestion = (sessionKey: string) => {
     quizApi
-      .get<Question>(`session/${sessionKey}/current-question`)
+      .get<Question>(`sessions/${sessionKey}/questions/current`)
       .then((response) => {
         setQuestion(response.data);
         setSelectedAlternative(null);
@@ -81,7 +81,7 @@ export default function PlayPage() {
 
     if (sessionStatus === SessionStatus.ONGOING) {
       quizApi
-        .put(`session/${sessionKey}/next-question`)
+        .put(`sessions/${sessionKey}/questions/next`)
         .then(() => {
           getCurrentQuestion(sessionKey);
         })
@@ -111,7 +111,7 @@ export default function PlayPage() {
     };
 
     quizApi
-      .post(`session/${sessionKey}/post-answer`, request)
+      .post(`sessions/${sessionKey}/answers`, request)
       .then((response) => {
         const result: Result = response.data;
 

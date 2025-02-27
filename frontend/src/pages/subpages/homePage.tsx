@@ -13,7 +13,7 @@ export default function HomePage() {
 
   useEffect(() => {
     quizApi
-      .get("/session/get-sessions") //FIX LATER
+      .get("/sessions")
       .then((response) => {
         setSessions(response.data);
       })
@@ -44,7 +44,7 @@ export default function HomePage() {
     Cookies.set("username", username);
 
     quizApi
-      .put(`/session/${sessionKey}/load`, request)
+      .put(`/sessions/${sessionKey}`, request)
       .then((response) => {
         const session = response.data;
 

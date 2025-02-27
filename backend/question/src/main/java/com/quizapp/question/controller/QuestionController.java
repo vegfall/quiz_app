@@ -26,7 +26,7 @@ public class QuestionController {
     }
 
     //Session
-    @PostMapping("post-session")
+    @PostMapping("sessions")
     public ResponseEntity<HttpStatus> postSession(@RequestBody NewSessionRequest request) {
         questionService.postSession(request);
 
@@ -34,7 +34,7 @@ public class QuestionController {
     }
 
     //Question
-    @GetMapping("{sessionKey}/{questionKey}")
+    @GetMapping("/sessions/{sessionKey}/questions/{questionKey}")
     public ResponseEntity<QuestionDTO> getQuestion(@PathVariable String sessionKey, @PathVariable Integer questionKey) {
         QuestionDTO question = questionService.getQuestion(sessionKey, questionKey);
 
@@ -43,13 +43,13 @@ public class QuestionController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("{sessionKey}/{currentQuestionKey}/check-more")
+    @GetMapping("/sessions/{sessionKey}/questions/{currentQuestionKey}/has-next")
     public ResponseEntity<Boolean> checkMoreQuestions(@PathVariable String sessionKey, @PathVariable Integer currentQuestionKey) {
         return new ResponseEntity<>(questionService.checkMoreQuestions(sessionKey, currentQuestionKey), HttpStatus.OK);
     }
 
     //Result
-    @PostMapping("{sessionKey}/{questionKey}/post-answer")
+    @PostMapping("sessions/{sessionKey}/questions/{questionKey}/answers")
     public ResponseEntity<ResultDTO> postAnswer(@PathVariable String sessionKey, @PathVariable Integer questionKey, @RequestBody PostAnswerRequest answer) {
         ResultDTO result = questionService.postAnswer(sessionKey, questionKey, answer);
 
@@ -58,7 +58,7 @@ public class QuestionController {
                 : new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("{sessionKey}/{username}/score")
+    @GetMapping("/sessions/{sessionKey}/users/{username}/score")
     public ResponseEntity<RevealScoreDTO> getScore(@PathVariable String sessionKey, @PathVariable String username) {
         RevealScoreDTO score = questionService.getScore(sessionKey, username);
 
@@ -67,7 +67,7 @@ public class QuestionController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("{sessionKey}/scores")
+    @GetMapping("sessions/{sessionKey}/scores")
     public ResponseEntity<List<SessionScoreDTO>> getScores(@PathVariable String sessionKey) {
         List<SessionScoreDTO> sessionScores = questionService.getScores(sessionKey);
 
@@ -76,7 +76,7 @@ public class QuestionController {
                 : new ResponseEntity<>(sessionScores, HttpStatus.OK);
     }
 
-    @PutMapping("{sessionKey}/{username}/score-reset")
+    @PutMapping("sessions/{sessionKey}/users/{username}/score/reset")
     public ResponseEntity<HttpStatus> resetScore(@PathVariable String sessionKey, @PathVariable String username) {
         questionService.resetScore(sessionKey, username);
 
